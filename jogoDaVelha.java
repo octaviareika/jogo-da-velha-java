@@ -52,7 +52,29 @@ public class jogoDaVelha extends JFrame{
     
     }
 
-    // criar um metodo que quando a pessoa clica no botao vai aparecer um X ou O
+    public void jogar(int i, int j){
+        // verificar se o jogador é X ou O
+        // verificar se a posição está vazia
+        // se estiver vazia, colocar o X ou O
+        // se não estiver vazia, não fazer nada
+        int partidas = 0;
+        int situacaoAtual = 1;
+        int turnoDojogador = 1;
+        while (partidas < 9 && situacaoAtual == 1 && botoes[i][j].getText() == ""){
+            
+            if (turnoDojogador == 1){
+                etiqueta.setText("Vez do jogador 1");
+                botoes[i][j].setText("X");
+                turnoDojogador = 2;
+            } else {
+                etiqueta.setText("Vez do jogador 2");
+                botoes[i][j].setText("O");
+                turnoDojogador = 1;
+            }
+            partidas++;
+        }
+    }
+
 
 
 
