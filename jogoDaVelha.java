@@ -12,6 +12,10 @@ public class jogoDaVelha extends JFrame{
 
     JLabel etiqueta = new JLabel();
     JButton[][] botoes;
+    private int partidas = 0;
+    private int situacaoAtual = 1;
+    private int turnoDojogador = 1;
+
 
     public jogoDaVelha(){
         super("Jogo da Velha");
@@ -31,7 +35,7 @@ public class jogoDaVelha extends JFrame{
         botoes = new JButton[3][3];
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
-                botoes[i][j] = new JButton();
+                botoes[i][j] = new JButton(); // criando o botao
                 botoes[i][j].setBounds(i * 100, j * 100, 100, 100); // ajustar a posição com base em i e j
 
                 final int finalI = i;
@@ -41,8 +45,7 @@ public class jogoDaVelha extends JFrame{
 
                 botoes[i][j].addActionListener(new ActionListener() { // funcao dentro de funcao
                     public void actionPerformed(ActionEvent e) {
-                        botoes[finalI][finalJ].setText("X"); // definir o texto do botão como "X"
-                        //jogar(i, j, getName());
+                        jogar(finalI, finalJ);
                     }
                     
                 });
@@ -57,10 +60,8 @@ public class jogoDaVelha extends JFrame{
         // verificar se a posição está vazia
         // se estiver vazia, colocar o X ou O
         // se não estiver vazia, não fazer nada
-        int partidas = 0;
-        int situacaoAtual = 1;
-        int turnoDojogador = 1;
-        while (partidas < 9 && situacaoAtual == 1 && botoes[i][j].getText() == ""){
+
+        while (partidas < 9 && situacaoAtual == 1 && botoes[i][j].getText().equals("")){
             
             if (turnoDojogador == 1){
                 etiqueta.setText("Vez do jogador 1");
