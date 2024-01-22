@@ -15,6 +15,7 @@ public class jogoDaVelha extends JFrame{
     private int partidas = 0;
     private int situacaoAtual = 1;
     private int turnoDojogador = 1;
+    JLabel contador;
 
 
     public jogoDaVelha(){
@@ -22,6 +23,7 @@ public class jogoDaVelha extends JFrame{
         setSize(600,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        contador = new JLabel();
 
         setLayout(new GridLayout(3, 3));
 
@@ -66,14 +68,31 @@ public class jogoDaVelha extends JFrame{
             if (turnoDojogador == 1){
                 etiqueta.setText("Vez do jogador 1");
                 botoes[i][j].setText("X");
+                botoes[i][j].setFont(new Font("Roboto", Font.PLAIN, 60));
                 turnoDojogador = 2;
             } else {
                 etiqueta.setText("Vez do jogador 2");
                 botoes[i][j].setText("O");
+                botoes[i][j].setFont(new Font("Roboto", Font.PLAIN, 60));
                 turnoDojogador = 1;
             }
             partidas++;
         }
+    }
+
+    public void verificarVitoria(){
+        // verificar se o jogador 1 ganhou
+        // verificar se o jogador 2 ganhou
+        // verificar se deu velha
+
+        if (partidas == 9 && situacaoAtual == 1){
+            etiqueta.setText("Deu velha");
+            situacaoAtual = 0;
+        }
+    }
+
+    public void contadorDePartida(){
+
     }
 
 
