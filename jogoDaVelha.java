@@ -12,7 +12,7 @@ public class jogoDaVelha extends JFrame{
 
     JButton[][] botoes;
     private int partidas = 0; // contador de partidas
-    private int situacaoAtual = 1;
+    private int situacaoAtual = 1; // situacao do jogo
     private int turnoDojogador = 1;
     JLabel contador;
     JLabel vitoria;
@@ -46,7 +46,6 @@ public class jogoDaVelha extends JFrame{
                     public void actionPerformed(ActionEvent e) {
                         jogar(finalI, finalJ);
                         contadorDePartida();
-                        verificarVitoria();
                     }
                     
                 });
@@ -94,6 +93,8 @@ public class jogoDaVelha extends JFrame{
                 botoes[i][j].setFont(new Font("Roboto", Font.PLAIN, 60));
                 turnoDojogador = 1;
             }
+
+            verificarVitoria();
             partidas++;
         }
     }
@@ -107,6 +108,45 @@ public class jogoDaVelha extends JFrame{
             //etiqueta.setText("Deu velha");
             
             situacaoAtual = 0;
+        }
+
+        // olhar as diagonais, as linhas e colunas
+        // linhas primeiro
+        for (int i = 0; i < 3; i++){
+            if (this.botoes[i][0].equals(this.botoes[i][1]) && this.botoes[i][1].equals(this.botoes[i][2])){
+                if (this.botoes[i][0].getText().equals("X")){
+                    //etiqueta.setText("Jogador 1 ganhou");
+                    situacaoAtual = 0;
+                } else if (this.botoes[i][0].getText().equals("O")){
+                    //etiqueta.setText("Jogador 2 ganhou");
+                    situacaoAtual = 0;
+                }
+            }
+        }
+
+        ///colunas
+        for (int j = 0; j < 3; j++){
+            if (this.botoes[0][j].getText().equals(this.botoes[1][j].getText()) && this.botoes[1][j].getText().equals(this.botoes[2][j].getText())){
+                if (this.botoes[0][j].getText().equals("X")){
+                    //etiqueta.setText("Jogador 1 ganhou");
+                    situacaoAtual = 0;
+                } else if (this.botoes[0][j].getText().equals("O")){
+                    //etiqueta.setText("Jogador 2 ganhou");
+                    situacaoAtual = 0;
+                }
+
+            }
+        }
+
+
+        if (this.botoes[0][0].getText().equals(this.botoes[1][1].getText()) && this.botoes[1][1].getText().equals(this.botoes[2][2].getText())){
+            if (this.botoes[0][0].getText().equals("X")){
+                //etiqueta.setText("Jogador 1 ganhou");
+                situacaoAtual = 0;
+            } else if (this.botoes[0][0].getText().equals("O")){
+                //etiqueta.setText("Jogador 2 ganhou");
+                situacaoAtual = 0;
+            }
         }
     }
 
