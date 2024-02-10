@@ -10,12 +10,13 @@ import java.awt.event.ActionEvent; // Import the ActionEvent class
 
 public class jogoDaVelha extends JFrame{
 
-    JLabel etiqueta = new JLabel();
     JButton[][] botoes;
-    private int partidas = 0;
+    private int partidas = 0; // contador de partidas
     private int situacaoAtual = 1;
     private int turnoDojogador = 1;
     JLabel contador;
+    JLabel vitoria;
+    JButton resetar; // botao para resetar o jogo
 
 
     public jogoDaVelha(){
@@ -24,15 +25,11 @@ public class jogoDaVelha extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         contador = new JLabel();
+        vitoria = new JLabel();
+        setLayout(new GridLayout(4, 3));
+        resetar = new JButton();
 
-        setLayout(new GridLayout(3, 3));
-
-        // adicionar botao
-
-       // botao = new JButton("Botao");
-        //botao.setBounds(100, 100, 100, 100);
-
-        // criar uma matriz de botoes
+        
         
         botoes = new JButton[3][3];
         for (int i=0; i<3; i++){
@@ -48,12 +45,33 @@ public class jogoDaVelha extends JFrame{
                 botoes[i][j].addActionListener(new ActionListener() { // funcao dentro de funcao
                     public void actionPerformed(ActionEvent e) {
                         jogar(finalI, finalJ);
+                        contadorDePartida();
+                        verificarVitoria();
                     }
                     
                 });
             }
         }
 
+        resetar.setText("Resetar");
+        resetar.setFont(new Font("Roboto", Font.PLAIN, 20));
+        resetar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                for (int i =0; i < 3; i ++){
+                    for (int j = 0; j < 3; j++){
+                        botoes[i][j].setText("");
+                        partidas = 0;
+                        situacaoAtual = 1;
+                        turnoDojogador = 1;
+                    }
+                
+                }
+            }
+        });
+        contador.setText("Partidas: " + String.valueOf(partidas));
+        contador.setFont(new Font("Arial", Font.PLAIN, 20));
+        this.add(contador);
+        this.add(resetar);
     
     }
 
@@ -66,12 +84,12 @@ public class jogoDaVelha extends JFrame{
         while (partidas < 9 && situacaoAtual == 1 && botoes[i][j].getText().equals("")){
             
             if (turnoDojogador == 1){
-                etiqueta.setText("Vez do jogador 1");
+                //etiqueta.setText("Vez do jogador 1");
                 botoes[i][j].setText("X");
                 botoes[i][j].setFont(new Font("Roboto", Font.PLAIN, 60));
                 turnoDojogador = 2;
             } else {
-                etiqueta.setText("Vez do jogador 2");
+                //etiqueta.setText("Vez do jogador 2");
                 botoes[i][j].setText("O");
                 botoes[i][j].setFont(new Font("Roboto", Font.PLAIN, 60));
                 turnoDojogador = 1;
@@ -86,13 +104,19 @@ public class jogoDaVelha extends JFrame{
         // verificar se deu velha
 
         if (partidas == 9 && situacaoAtual == 1){
-            etiqueta.setText("Deu velha");
+            //etiqueta.setText("Deu velha");
+            
             situacaoAtual = 0;
         }
     }
 
-    public void contadorDePartida(){
+    public void incrementaPartida(){
+        partidas++;
+        contadorDePartida();
+    }
 
+    public void contadorDePartida(){
+        this.contador.setText("Partidas: " + partidas );
     }
 
 
