@@ -16,24 +16,23 @@ public class jogoDaVelha extends JFrame{
     public jogoDaVelha(){
         //JFrame frame = new JFrame();
         
-        this.setSize(400, 600);
+        this.setSize(300, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // fechar a janela
         //this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        this.setLayout(new GridLayout(4, 3));
+        this.setLayout(new GridLayout(3, 3));
         this.setTitle("Jogo da Velha");
 
         JPanel painelBotoes = new JPanel();
         painelBotoes.setLayout(new GridLayout(3, 3));
-        this.add(painelBotoes);
+        
 
         botoes = new JButton[3][3]; // instanciando os botoes
         
         botaoReiniciar = new JButton("Reiniciar");
-        botaoReiniciar.setSize(30, 50);
-
+        botaoReiniciar.setPreferredSize(new Dimension(100, 50));
         JPanel controles = new JPanel();
         controles.setLayout(new FlowLayout());
-        Dimension botaoSize = new Dimension(100, 150); // Largura 100, Altura 150
+        controles.setSize(300, 100);
 
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
@@ -58,6 +57,7 @@ public class jogoDaVelha extends JFrame{
             }
         }
 
+        this.add(painelBotoes);
         this.setVisible(true); // mostrar a janela
         this.add(controles.add(this.getBotaoReiniciar()));
         this.getBotaoReiniciar().addActionListener( new ActionListener() {
