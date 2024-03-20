@@ -125,8 +125,9 @@ public class jogoDaVelha extends JFrame{
 
             }
             // funcao de verificar vitoria aq 
-            verificarVitoria();
             incrementarPartida();
+
+            verificarVitoria();
         }
 
     }
@@ -183,9 +184,12 @@ public class jogoDaVelha extends JFrame{
         }
 
 
-        if (this.getJogadas() == 9){
-            JOptionPane.showMessageDialog(null, "Empate!");
-            estadoDoJogo = false;
+        if (this.getJogadas() >= 9){
+            if (estadoDoJogo){
+                JOptionPane.showMessageDialog(null, "Empate!");
+                estadoDoJogo = false;
+            }
+           
         }
     }
 
