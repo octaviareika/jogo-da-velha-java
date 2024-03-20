@@ -14,36 +14,33 @@ public class jogoDaVelha extends JFrame{
     private boolean estadoDoJogo = true;
 
     public jogoDaVelha(){
-        //JFrame frame = new JFrame();
         
-        this.setSize(300, 600);
+        this.setSize(300, 450);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // fechar a janela
-        //this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        this.setLayout(new GridLayout(3, 3));
-        this.setTitle("Jogo da Velha");
-
-        JPanel painelBotoes = new JPanel();
-        painelBotoes.setLayout(new GridLayout(3, 3));
         
+        this.setTitle("Jogo da Velha");
+ 
 
         botoes = new JButton[3][3]; // instanciando os botoes
         
         botaoReiniciar = new JButton("Reiniciar");
-        botaoReiniciar.setPreferredSize(new Dimension(100, 50));
+
+        botaoReiniciar.setBounds(100, 350, 100, 50); // ajustar a posição do botao reiniciar
         JPanel controles = new JPanel();
-        controles.setLayout(new FlowLayout());
-        controles.setSize(300, 100);
+        controles.setLayout(null);
+        controles.setSize(100, 50);
+        controles.add(botaoReiniciar);
+
 
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
 
 
                 botoes[i][j] = new JButton();
-                //botoes[i][j].setBounds(i * 150, j * 150, 100, 100); // ajustar a posição com base em i e j
-                // ajusar o tamanho
-                //botoes[i][j].setPreferredSize(new Dimension(100, 100));
+                botoes[i][j].setBounds(i * 100, j * 100, 100, 100); // ajustar a posição com base em i e j
+                controles.add(botoes[i][j]);
 
-                painelBotoes.add(botoes[i][j]);
+                
 
                 final int finalLinha = i;
                 final int finalColuna = j;
@@ -57,9 +54,10 @@ public class jogoDaVelha extends JFrame{
             }
         }
 
-        this.add(painelBotoes);
         this.setVisible(true); // mostrar a janela
-        this.add(controles.add(this.getBotaoReiniciar()));
+
+        this.add(controles);
+
         this.getBotaoReiniciar().addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 reiniciarJogo();
@@ -193,7 +191,7 @@ public class jogoDaVelha extends JFrame{
 
     public void incrementarPartida(){
         jogadas++;
-       // System.out.println(jogadas);
+        System.out.println(jogadas);
     }
 
     public void reiniciarJogo(){
