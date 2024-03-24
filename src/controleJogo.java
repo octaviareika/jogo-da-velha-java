@@ -10,7 +10,7 @@ public class controleJogo extends JFrame{
     private JButton[][] botoes;
     private int jogador = 1;
 
-    private int jogadas = 0;
+    Contador jogadas;
     private boolean estadoDoJogo = true;
     private reiniciarJogo reiniciarJogo;
     JLabel jogadorAtual;
@@ -27,6 +27,10 @@ public class controleJogo extends JFrame{
         // instanciando os botoes
         botoes = new JButton[3][3]; 
 
+        // instanciando o contador
+        jogadas = new Contador();
+
+        // instanciando o botao reiniciar
         reiniciarJogo = new reiniciarJogo();
 
         // mostrar qual jogador começa
@@ -96,11 +100,11 @@ public class controleJogo extends JFrame{
         this.jogador = jogador;
     }
 
-    public int getJogadas(){
+    public Contador getJogadas(){
         return this.jogadas;
     }
 
-    public void setJogadas(int jogadas){
+    public void setJogadas(Contador jogadas){
         this.jogadas = jogadas;
     }
 
@@ -124,7 +128,7 @@ public class controleJogo extends JFrame{
 
     public void jogar(int i, int j){
 
-        while (this.getEstadoDoJogo() && jogadas < 9 && this.botoes[i][j].getText().equals("")){ // verificar tbm se os botoes estao "em branco"
+        while (this.getEstadoDoJogo() && jogadas.getContador() < 9 && this.botoes[i][j].getText().equals("")){ // verificar tbm se os botoes estao "em branco"
             if (jogador == 1){
                 // vez do jogador 1
                 this.botoes[i][j].setText("X");
@@ -141,8 +145,8 @@ public class controleJogo extends JFrame{
                 jogador--;
 
             }
-            // funcao de verificar vitoria aq 
-            incrementarPartida();
+           
+            jogadas.incrementarPartida();
 
             verificarVitoria();
         }
@@ -195,7 +199,7 @@ public class controleJogo extends JFrame{
         }
 
 
-        if (this.getJogadas() >= 9){
+        if (jogadas.getContador() >= 9){
             if (estadoDoJogo){
                 JOptionPane.showMessageDialog(null, "Empate!");
                 estadoDoJogo = false;
@@ -204,10 +208,6 @@ public class controleJogo extends JFrame{
         }
     }
 
-    public void incrementarPartida(){
-        jogadas++;
-        System.out.println(jogadas);
-    }
 
     public void reiniciarJogo(){
         for (int i =0; i <3; i++){
@@ -217,7 +217,7 @@ public class controleJogo extends JFrame{
             
         }
         
-        jogadas = 0;
+        this.jogadas.setContador(0);
         estadoDoJogo = true;
     }
 
