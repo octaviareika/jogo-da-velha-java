@@ -185,7 +185,7 @@ public class controleJogo extends JFrame{
             }
         }
 
-        // diagonal
+        // diagonal principal
         if (botoes[0][0].getText().equals("X") && botoes[0][0].getText().equals(botoes[1][1].getText()) && botoes[0][0].getText().equals(botoes[2][2].getText()) && !botoes[0][0].getText().equals("")){
             estadoDoJogo = false;
             JOptionPane.showMessageDialog(null, "Jogador 1 venceu!"); // mensagem de vitoria
@@ -196,6 +196,17 @@ public class controleJogo extends JFrame{
             estadoDoJogo = false;
             JOptionPane.showMessageDialog(null, "Jogador 2 venceu!"); // mensagem de vitoria
             estadoDoJogo = false;
+        }
+
+
+        // diagonal secundária
+        if (botoes[0][2].getText().equals("X") && botoes[0][2].getText().equals(botoes[1][1].getText()) && botoes[0][2].getText().equals(botoes[2][0].getText()) && !botoes[0][2].getText().equals("")){
+            estadoDoJogo = false;
+            JOptionPane.showMessageDialog(null, "Jogador 1 venceu!"); // mensagem de vitoria
+        }
+        else if (botoes[0][2].getText().equals("O") && botoes[0][2].getText().equals(botoes[1][1].getText()) && botoes[0][2].getText().equals(botoes[2][0].getText()) && !botoes[0][2].getText().equals("")){
+            estadoDoJogo = false;
+            JOptionPane.showMessageDialog(null, "Jogador 2 venceu!"); // mensagem de vitoria
         }
 
 
