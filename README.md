@@ -3,4 +3,5 @@
 ## Utilizando jogo da velha em Java por meio da interface gráfica Swing  
 
 <h3> Jogo foi feito na IDE VSCode </h3>
-<h3> Interface gráfica: Swing </h3>
+<h3 color="red"> Interface gráfica: Swing </h3>
+<h3> Versão do Java: java-11-openjdk-amd64 </h3>

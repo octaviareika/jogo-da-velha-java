@@ -1,37 +1,51 @@
-import java.awt.*;
+package src;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent; // Import the ActionEvent class
 
-public class jogoDaVelha extends JFrame{
+import java.awt.Font;
+import java.awt.event.ActionEvent; 
+
+public class controleJogo extends JFrame{
 
     private JButton[][] botoes;
     private int jogador = 1;
-    private JButton botaoReiniciar;
-   
+
     private int jogadas = 0;
     private boolean estadoDoJogo = true;
+    private reiniciarJogo reiniciarJogo;
+    JLabel jogadorAtual;
 
-    public jogoDaVelha(){
+    public controleJogo(){
         
         this.setSize(300, 450);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // fechar a janela
-        
+        this.setResizable(false); // nao permitir redimensionar
+        this.setLocationRelativeTo(null); // centralizar a janela
         this.setTitle("Jogo da Velha");
  
 
-        botoes = new JButton[3][3]; // instanciando os botoes
-        
-        botaoReiniciar = new JButton("Reiniciar");
+        // instanciando os botoes
+        botoes = new JButton[3][3]; 
 
-        botaoReiniciar.setBounds(100, 350, 100, 50); // ajustar a posição do botao reiniciar
+        reiniciarJogo = new reiniciarJogo();
+
+        // mostrar qual jogador começa
+        jogadorAtual = new JLabel("Jogador 1");
+        jogadorAtual.setBounds(110, 300, 100, 50);
+        // ajustar o tamanho do texto
+        jogadorAtual.setFont(jogadorAtual.getFont().deriveFont(19.0f));
+        
+
+        
+        // criar um painel para os botoes
         JPanel controles = new JPanel();
         controles.setLayout(null);
         controles.setSize(100, 50);
-        controles.add(botaoReiniciar);
+        controles.add(jogadorAtual);
+        controles.add(reiniciarJogo.getBotaoReiniciar());
 
 
+        
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
 
@@ -39,7 +53,6 @@ public class jogoDaVelha extends JFrame{
                 botoes[i][j] = new JButton();
                 botoes[i][j].setBounds(i * 100, j * 100, 100, 100); // ajustar a posição com base em i e j
                 controles.add(botoes[i][j]);
-
                 
 
                 final int finalLinha = i;
@@ -56,14 +69,13 @@ public class jogoDaVelha extends JFrame{
 
         this.setVisible(true); // mostrar a janela
 
-        this.add(controles);
+        this.add(controles); // adicionar os botoes na janela
 
-        this.getBotaoReiniciar().addActionListener( new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                reiniciarJogo();
-            }
-        
-        });
+        reiniciarJogo.getBotaoReiniciar().addActionListener(new ActionListener() { // adicionar ação ao botao reiniciar
+          public void actionPerformed(ActionEvent e){
+              reiniciarJogo();
+          }
+      });
 
     }
 
@@ -100,14 +112,14 @@ public class jogoDaVelha extends JFrame{
         this.estadoDoJogo = estadoDoJogo;
     }
 
-    public JButton getBotaoReiniciar(){
-        return this.botaoReiniciar;
+
+    public JLabel getJogadorAtual(){
+        return this.jogadorAtual;
     }
 
-    public void setBotaoReiniciar(JButton botaoReiniciar){
-        this.botaoReiniciar = botaoReiniciar;
+    public void setJogadorAtual(JLabel jogadorAtual){
+        this.jogadorAtual = jogadorAtual;
     }
-
 
 
     public void jogar(int i, int j){
@@ -116,11 +128,16 @@ public class jogoDaVelha extends JFrame{
             if (jogador == 1){
                 // vez do jogador 1
                 this.botoes[i][j].setText("X");
+                this.botoes[i][j].setFont(new Font("Roboto", Font.PLAIN, 30));
+                this.getJogadorAtual().setText("Jogador 2");
                 jogador++;
             }
 
             else { // jogador 2
                 this.botoes[i][j].setText("O");
+                this.botoes[i][j].setFont(new Font("Roboto", Font.PLAIN, 30));
+                this.getJogadorAtual().setText("Jogador 1");
+
                 jogador--;
 
             }
@@ -136,10 +153,6 @@ public class jogoDaVelha extends JFrame{
     //verifica Vitoria
     public void verificarVitoria(){
 
-        // olhar empate
-        
-        
-
         for (int i =0; i < 3; i++){
             if (botoes[i][0].getText().equals("X") && botoes[i][0].getText().equals(botoes[i][1].getText()) && botoes[i][0].getText().equals(botoes[i][2].getText()) && !botoes[i][0].getText().equals("")){
                 estadoDoJogo = false;
@@ -148,10 +161,8 @@ public class jogoDaVelha extends JFrame{
             }
 
             if (botoes[i][0].getText().equals("O") && botoes[i][0].getText().equals(botoes[i][1].getText()) && botoes[i][0].getText().equals(botoes[i][2].getText()) && !botoes[i][0].getText().equals("")){
-
                 estadoDoJogo = false;
                 JOptionPane.showMessageDialog(null, "Jogador 2 venceu!"); // mensagem de vitoria
-                
             }
         }
 
